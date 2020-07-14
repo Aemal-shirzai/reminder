@@ -31,34 +31,24 @@
                 </a></div>
             <div class="sidebar-wrapper">
                 <ul class="nav">
-                    <li class="nav-item active  ">
-                        <a class="nav-link" href="./dashboard.html">
-                            <i class="material-icons">dashboard</i>
-                            <p>Dashboard</p>
-                        </a>
-                    </li>
-                    <li class="nav-item ">
-                        <a class="nav-link" href="./user.html">
+                    <li class="nav-item  {{ (Route::currentRouteName() == 'profile.edit' ? 'active' : '') }}">
+                        <a class="nav-link" href="{{route('profile.edit')}}">
                             <i class="material-icons">person</i>
-                            <p>User Profile</p>
+                            <p>Manage Profile</p>
                         </a>
                     </li>
-                    <li class="nav-item ">
-                        <a class="nav-link" href="./tables.html">
-                            <i class="material-icons">content_paste</i>
-                            <p>Table List</p>
+                    <li class="nav-item @if(Route::currentRouteName() == 'colleagues.createList' ||
+                                            Route::currentRouteName() == 'colleagues.edit') active  @endif">
+                        <a class="nav-link" href="{{ route('colleagues.createList') }}">
+                            <i class="material-icons">people_alt</i>
+                            <p>Manage Colleagues</p>
                         </a>
                     </li>
-                    <li class="nav-item ">
-                        <a class="nav-link" href="./typography.html">
-                            <i class="material-icons">library_books</i>
-                            <p>Typography</p>
-                        </a>
-                    </li>
-                    <li class="nav-item ">
-                        <a class="nav-link" href="./notifications.html">
-                            <i class="material-icons">notifications</i>
-                            <p>Notifications</p>
+                    <li class="nav-item @if(Route::currentRouteName() == 'events.createList' ||
+                                            Route::currentRouteName() == 'events.edit') active  @endif">
+                        <a class="nav-link" href="{{route('events.createList')}}">
+                            <i class="material-icons">events</i>
+                            <p>Manage Events</p>
                         </a>
                     </li>
                 </ul>
@@ -101,45 +91,9 @@
             </nav>
             <!-- End Navbar -->
             <div class="content">
-
+                
                 @yield("content")
 
-
-                <footer class="footer">
-                    <div class="container-fluid">
-                        <nav class="float-left">
-                            <ul>
-                                <li>
-                                    <a href="https://www.creative-tim.com">
-                                        Creative Tim
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="https://creative-tim.com/presentation">
-                                        About Us
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="http://blog.creative-tim.com">
-                                        Blog
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="https://www.creative-tim.com/license">
-                                        Licenses
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
-                        <div class="copyright float-right">
-                            &copy;
-                            <script>
-                            document.write(new Date().getFullYear())
-                            </script>, made with <i class="material-icons">favorite</i> by
-                            <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a> for a better web.
-                        </div>
-                    </div>
-                </footer>
             </div>
         </div>
 

@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,3 +27,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get("/main",function() {
     return view("layouts.main");
 });
+Route::GET("profile/edit","ProfileController@edit")->name("profile.edit");
+Route::GET("colleagues","ColleaguesController@createList")->name("colleagues.createList");
+Route::GET("colleagues/{id}/edit","ColleaguesController@edit")->name("colleagues.edit");
+Route::GET("events","EventController@createList")->name("events.createList");
+Route::GET("events/{id}/edit","EventController@edit")->name("events.edit");
