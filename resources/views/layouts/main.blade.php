@@ -53,6 +53,12 @@
                             <p>Manage Events</p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{route('logout')}}" onclick="event.preventDefault(); document.getElementById('logout-form').submit()">
+                            <i class="material-icons">exit_to_app</i>
+                            <p>Logout</p>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -75,20 +81,23 @@
                             <li class="nav-item dropdown">
                                 <a class="nav-link" href="javascript:;" id="navbarDropdownProfile"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="material-icons" style="font-size: 40px;">person</i>
+                                    {{ Auth::user()->name }} 
+                                    <i class="material-icons" style="font-size: 15px;">chevron_right</i>
                                     <p class="d-lg-none d-md-block">
                                         Account
                                     </p>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
-                                    <a class="dropdown-item" href="#">Profile</a>
-                                    <a class="dropdown-item" href="#">Settings</a>
+                                    <a class="dropdown-item" href="{{route('profile.edit')}}">Profile</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Log out</a>
+                                    <a class="dropdown-item" href="{{route('logout')}}"
+                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit()">Log out</a>
                                 </div>
                             </li>
                         </ul>
                     </div>
+                    {!! Form::open(["method"=>"POST","action"=>"Auth\LoginController@logout","id"=>"logout-form"]) !!}
+                    {!! Form::close() !!}
                 </div>
             </nav>
             <!-- End Navbar -->

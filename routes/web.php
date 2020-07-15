@@ -15,8 +15,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('layouts.main');
+})->name("main")->middleware("auth");
 
 Auth::routes();
 
@@ -24,9 +24,10 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 
 // routes
-Route::get("/main",function() {
-    return view("layouts.main");
-});
+// Route::get("/main",function() {
+//     return view("layouts.main");
+// });
+
 Route::GET("profile/edit","ProfileController@edit")->name("profile.edit");
 Route::GET("colleagues","ColleaguesController@createList")->name("colleagues.createList");
 Route::GET("colleagues/{id}/edit","ColleaguesController@edit")->name("colleagues.edit");
