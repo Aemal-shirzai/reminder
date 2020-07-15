@@ -1,65 +1,48 @@
-@extends('layouts.app')
-
+@extends('layouts.auth')
+@section("title","Reset Password")
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
-
-                <div class="card-body">
-                    <form method="POST" action="{{ route('password.update') }}">
-                        @csrf
-
-                        <input type="hidden" name="token" value="{{ $token }}">
-
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus>
-
+<section class="h-100">
+    <div class="container h-100">
+        <div class="row justify-content-md-center align-items-center h-100">
+            <div class="card-wrapper mt-5" style="margin: 0 auto;">
+                <div class="card fat">
+                    <div class="card-body">
+                        <h4 class="card-title">Reset Password</h4>
+                        {!! Form::open(["method"=>"post","action"=>"Auth\ResetPasswordController@reset"]) !!}
+                            <input type="hidden" name="token" value="{{ $token }}">
+                            <div class="form-group mt-4">
+                                {!! Form::label("email","E-Mail Address",["class"=>"bmd-label-floating"]) !!}
+                                {!! Form::text("email",null,["class"=>"form-control"])!!}
                                 @error('email')
-                                    <span class="invalid-feedback" role="alert">
+                                    <span class="invalid-feedback" role="alert" style="display: block;">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
+                            <div class="form-group">
+                                {!! Form::label("password","Password",["class"=>"bmd-label-floating"]) !!}
+                                {!! Form::password("password",["class"=>"form-control"]) !!}
+                                <div class="form-text text-muted">
+                                    <small>Make sure your password is strong and easy to remember</small>
+                                </div>
                                 @error('password')
-                                    <span class="invalid-feedback" role="alert">
+                                    <span class="invalid-feedback" role="alert" style="display: block;">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
                             </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                            <div class="form-group">
+                                {!! Form::label("password-confirm","Confirm Password",["class"=>"bmd-label-floating"]) !!}
+                                {!! Form::password("password_confirmation",["class"=>"form-control"]) !!}
                             </div>
-                        </div>
-
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Reset Password') }}
-                                </button>
+                            <div class="form-group">
+                                {!! Form::submit("Reset Password",["class"=>"btn btn-primary col-12"]) !!}
                             </div>
-                        </div>
-                    </form>
+                        {!! Form::close() !!}
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</section>
 @endsection

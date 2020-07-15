@@ -49,7 +49,9 @@ nav,
 section {
   display: block;
 }
-
+.dateP {
+  background-color: white !important;
+}
 body {
   margin: 0;
   font-family: "Roboto", "Helvetica", "Arial", sans-serif;

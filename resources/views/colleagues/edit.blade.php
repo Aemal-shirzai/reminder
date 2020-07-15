@@ -1,6 +1,112 @@
 @extends("layouts.main")
 @section("title","Edit Colleagues")
+@section("pageTitle","Update Colleagues Information")
 @section("content")
-    <h3 class="text-center">Edit colleagues with id {{ $id }}</h3>
-    
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-10 offset-md-1">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title">Edit Colleague Information</h4>
+                        <p class="card-category">Update Data Of Your Colleagues</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-4">
+                            <a href="{{route('colleagues.createList')}}" class="btn btn-info" style="padding:8px">Cancel</a>
+                            <a href="#" class="btn btn-danger" style="padding:8px" data-toggle="modal" data-target="#CDeleteModal"><span class="material-icons">delete</span></a>
+                            <a href="#" class="btn btn-warning" style="padding:8px"><span class="material-icons">pending</span></a>
+                        </div>
+                        {!! Form::open() !!}
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    {!! Form::label("full_name","Full Name *",["class"=>"bmd-label-floating"]) !!}
+                                    {!! Form::text("full_name",null,["class"=>"form-control"]) !!}
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    {!! Form::label("country","Country Name *",["class"=>"bmd-label-floating"]) !!}
+                                    {!! Form::text("country",null,["class"=>"form-control"]) !!}
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    {!! Form::label("work_country","Work Country *",["class"=>"bmd-label-floating"]) !!}
+                                    {!! Form::text("work_country",null,["class"=>"form-control"]) !!}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    {!! Form::label("office_name","Office *",["class"=>"bmd-label-floating"]) !!}
+                                    {!! Form::text("office_name",null,["class"=>"form-control"]) !!}
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    {!! Form::label("position","Position *",["class"=>"bmd-label-floating"]) !!}
+                                    {!! Form::text("position",null,["class"=>"form-control"]) !!}
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    {!! Form::label("email","email *",["class"=>"bmd-label-floating"]) !!}
+                                    {!! Form::text("email",null,["class"=>"form-control"]) !!}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    {!! Form::label("phone1","Telephone",["class"=>"bmd-label-floating"]) !!}
+                                    {!! Form::text("phone1",null,["class"=>"form-control"]) !!}
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    {!! Form::label("phone2","Cell Phone",["class"=>"bmd-label-floating"]) !!}
+                                    {!! Form::text("phone2",null,["class"=>"form-control"]) !!}
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    {!! Form::label("phone3","Office Phone",["class"=>"bmd-label-floating"]) !!}
+                                    {!! Form::text("phone3",null,["class"=>"form-control"]) !!}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    {!! Form::label("website","Website",["class"=>"bmd-label-floating"]) !!}
+                                    {!! Form::text("website",null,["class"=>"form-control"]) !!}
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    {!! Form::label("address","Address",["class"=>"bmd-label-floating"]) !!}
+                                    {!! Form::text("address",null,["class"=>"form-control"]) !!}
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    {!!
+                                    Form::select("relagion_id",[""=>"Relagion","1"=>"Islam","2"=>"Christian"],null,["class"=>"form-control"])
+                                    !!}
+                                </div>
+                            </div>
+                        </div>
+                        {!! Form::submit("Update Colleague",["class"=>"btn btn-primary"]) !!}
+                        <div class="clearfix"></div>
+                        {!! Form::close() !!}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@include("../modals.colleagues")
 @endsection

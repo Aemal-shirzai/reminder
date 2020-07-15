@@ -14,6 +14,8 @@
     <link rel="stylesheet" type="text/css"
         href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+    <!-- date picker css -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <!-- CSS Files -->
     <link href="{{asset('css/material-dashboard.css')}}" rel="stylesheet">
 </head>
@@ -103,9 +105,13 @@
         <script src="{{asset('js/core/bootstrap-material-design.min.js')}}"></script>
         <script src="{{asset('js/perfect-scrollbar.jquery.min.js')}}"></script>
 
+        <!-- date picker script -->
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
         <!-- others -->
         <script src="{{asset('js/material-dashboard.js')}}" type="text/javascript"></script>
         <script src="{{asset('js/extra.js')}}" type="text/javascript"></script>
+
+        @yield("scripts")
 </body>
 
 </html>

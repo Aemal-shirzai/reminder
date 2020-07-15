@@ -15,6 +15,7 @@ class CreateEventsTable extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->id();
+            $table->string("title");
             $table->text("message");
             $table->bigInteger("religion_id")->unsigned();
             $table->timestamp("date");
