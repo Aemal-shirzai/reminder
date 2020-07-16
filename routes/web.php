@@ -18,7 +18,7 @@ Route::get('/', function () {
     return view('layouts.main');
 })->name("main")->middleware("auth");
 
-Auth::routes();
+Auth::routes(["register"=>false]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 
