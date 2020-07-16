@@ -29,6 +29,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 // });
 
 Route::GET("profile/edit","ProfileController@edit")->name("profile.edit");
+Route::PUT("profile/update","ProfileController@update")->name("profile.update");
+Route::PUT("profile/update/password","ProfileController@updatePassword")->name("profile.update.password");
+
 Route::GET("colleagues","ColleaguesController@createList")->name("colleagues.createList");
 Route::GET("colleagues/{id}/edit","ColleaguesController@edit")->name("colleagues.edit");
 Route::GET("events","EventController@createList")->name("events.createList");
