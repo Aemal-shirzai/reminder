@@ -34,5 +34,9 @@ Route::PUT("profile/update/password","ProfileController@updatePassword")->name("
 
 Route::GET("colleagues","ColleaguesController@createList")->name("colleagues.createList");
 Route::GET("colleagues/{id}/edit","ColleaguesController@edit")->name("colleagues.edit");
+Route::POST("colleagues/store","ColleaguesController@store")->name("colleagues.store");
+Route::PUT("colleagues/{id}/update","ColleaguesController@update")->name("colleagues.update");
+
+
 Route::GET("events","EventController@createList")->name("events.createList");
 Route::GET("events/{id}/edit","EventController@edit")->name("events.edit");

@@ -18,7 +18,8 @@ class Colleague extends Model
 		"email",
 		"website",
 		"address",
-		"religion_id"
+		"religion_id",
+		"status"
 	];
 	
 	public function religion() {

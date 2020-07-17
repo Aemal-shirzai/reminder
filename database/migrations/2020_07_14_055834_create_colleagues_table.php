@@ -24,9 +24,9 @@ class CreateColleaguesTable extends Migration
             $table->string("phone2")->nullable();
             $table->string("phone3")->nullable();
             $table->string("email")->unique();
-            $table->string("website");
+            $table->string("website")->nullable();
             $table->string("address");
-            $table->tinyInteger("status");
+            $table->tinyInteger("status")->default(1);
             $table->bigInteger("religion_id")->unsigned()->nullable();
             $table->timestamps();
 
