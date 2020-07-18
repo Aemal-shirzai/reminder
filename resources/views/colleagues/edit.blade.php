@@ -14,11 +14,15 @@
                     <div class="card-body">
                         <div class="mb-4">
                             <a href="{{route('colleagues.createList')}}" class="btn btn-info"
-                                style="padding:8px">Cancel</a>
-                            <a href="#" class="btn btn-danger" style="padding:8px" data-toggle="modal"
-                                data-target="#CDeleteModal"><span class="material-icons">delete</span></a>
-                            <a href="#" class="btn btn-warning" style="padding:8px"><span
-                                    class="material-icons">pending</span></a>
+                                style="padding:8px">Back</a>
+                            <a href="javascript:void(0)" class="btn {{ ($colleague->status == 1 ? 'btn-success' : 'btn-warning') }}" style="padding:8px"
+                                onclick="changeStatus(event, '{{ $colleague->id }}')" id="statusBtn-{{$colleague->id}}">
+                                @if($colleague->status == 1)
+                                <span class="material-icons">check_circle</span>
+                                @else
+                                <span class="material-icons">pending</span>
+                                @endif
+                            </a>
                         </div>
                         {!! Form::model($colleague,["method"=>"PUT","action"=>["ColleaguesController@update",$colleague->id]]) !!}
                         @if(session("colleaguesUpdateSuccess"))

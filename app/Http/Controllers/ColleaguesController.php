@@ -78,4 +78,12 @@ class ColleaguesController extends Controller
 
         return response()->json(["Cstatus"=>$colleague->status]);
     }
+
+    // delete colleagues
+    public function delete(Request $request) {
+        $colleague = Colleague::findOrFail($request->id);
+        $colleague->delete();
+
+        return response()->json(["message"=>"Deleted!"]);
+    }
 }

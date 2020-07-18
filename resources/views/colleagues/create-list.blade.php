@@ -23,6 +23,6 @@
 @endsection
     @section("scripts") 
     <script>
-        var changeStatusRoute = "{{ route('colleagues.changeStatus') }}"
+       
     </script>
 @endsection

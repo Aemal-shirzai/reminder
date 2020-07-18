@@ -19,7 +19,7 @@
                 </thead>
                 <tbody>
                     @foreach($colleagues as $colleague)
-                    <tr>
+                    <tr id="CRow-{{$colleague->id}}">
                         <td>{{ $colleague->id }}</td>
                         <td>{{ $colleague->full_name }}</td>
                         <td>{{ $colleague->country }}</td>
@@ -29,9 +29,13 @@
                         <td>
                             <a href="{{route('colleagues.edit',$colleague->id)}}" class="btn btn-info" style="padding:8px"><span
                                     class="material-icons">edit</span></a>
-                            <a href="#" class="btn btn-danger" style="padding:8px" data-toggle="modal"
-                                data-target="#CDeleteModal"><span class="material-icons">delete</span></a>
-                            <a href="#" class="btn {{ ($colleague->status == 1 ? 'btn-success' : 'btn-warning') }}" style="padding:8px"
+
+                            <a href="javascript:void(0)" class="btn btn-danger" style="padding:8px" data-toggle="modal" data-target="#CDeleteModal" 
+                                data-id="{{ $colleague->id }}" id="cDeleteButton-{{$colleague->id}}">
+                                <span class="material-icons">delete</span>
+                            </a>
+
+                            <a href="javascript:void(0)" class="btn {{ ($colleague->status == 1 ? 'btn-success' : 'btn-warning') }}" style="padding:8px"
                                 onclick="changeStatus(event, '{{ $colleague->id }}')" id="statusBtn-{{$colleague->id}}">
                                 @if($colleague->status == 1)
                                 <span class="material-icons">check_circle</span>

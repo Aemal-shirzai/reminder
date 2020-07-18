@@ -37,7 +37,7 @@ Route::GET("colleagues/{id}/edit","ColleaguesController@edit")->name("colleagues
 Route::POST("colleagues/store","ColleaguesController@store")->name("colleagues.store");
 Route::PUT("colleagues/{id}/update","ColleaguesController@update")->name("colleagues.update");
 Route::PUT("colleagues/changeStatus","ColleaguesController@changeStatus")->name("colleagues.changeStatus");
-
+Route::DELETE("colleagues/delete","ColleaguesController@delete")->name("colleagues.delete");
 
 Route::GET("events","EventController@createList")->name("events.createList");
 Route::GET("events/{id}/edit","EventController@edit")->name("events.edit");

@@ -124,6 +124,8 @@
 
         <script>
             var token = "{{ Session::token() }}"
+            var changeStatusRoute = "{{ route('colleagues.changeStatus') }}"
+            var colleaguesDeleteRoute = "{{ route('colleagues.delete') }}"
         </script>
         @yield("scripts")
 </body>
