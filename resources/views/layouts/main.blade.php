@@ -6,6 +6,7 @@
     <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
     <!-- <link rel="icon" type="image/png" href="../assets/img/favicon.png"> -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="csrf_token" content="{{ csrf_token() }}">
     <title>
         @yield("title")
     </title>
@@ -119,7 +120,11 @@
         <!-- others -->
         <script src="{{asset('js/material-dashboard.js')}}" type="text/javascript"></script>
         <script src="{{asset('js/extra.js')}}" type="text/javascript"></script>
+        <script src="{{asset('js/custom.js')}}" type="text/javascript"></script>
 
+        <script>
+            var token = "{{ Session::token() }}"
+        </script>
         @yield("scripts")
 </body>
 

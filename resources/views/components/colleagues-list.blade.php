@@ -31,8 +31,14 @@
                                     class="material-icons">edit</span></a>
                             <a href="#" class="btn btn-danger" style="padding:8px" data-toggle="modal"
                                 data-target="#CDeleteModal"><span class="material-icons">delete</span></a>
-                            <a href="#" class="btn btn-success" style="padding:8px"><span
-                                    class="material-icons">check_circle</span></a>
+                            <a href="#" class="btn {{ ($colleague->status == 1 ? 'btn-success' : 'btn-warning') }}" style="padding:8px"
+                                onclick="changeStatus(event, '{{ $colleague->id }}')" id="statusBtn-{{$colleague->id}}">
+                                @if($colleague->status == 1)
+                                <span class="material-icons">check_circle</span>
+                                @else
+                                <span class="material-icons">pending</span>
+                                @endif
+                            </a>
                         </td>
                         <td><a href="#" data-toggle="modal" data-target="#CFullInfoModal">Full Info</a></td>
                     </tr>

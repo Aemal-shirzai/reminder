@@ -65,4 +65,17 @@ class ColleaguesController extends Controller
             return back()->with("colleaguesUpdateSuccess","Colleague Has Been Updated!");
         }
     }
+
+    // change status
+    public function changeStatus(Request $request) {
+        $colleague = Colleague::findOrFail($request->id);
+        $status = $colleague->status;
+        if($status == 1) {
+            $colleague->update(["status"=>0]);
+        }else if($status == 0) {
+            $colleague->update(["status"=>1]);
+        }
+
+        return response()->json(["Cstatus"=>$colleague->status]);
+    }
 }
