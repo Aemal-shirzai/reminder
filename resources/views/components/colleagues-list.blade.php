@@ -44,7 +44,15 @@
                                 @endif
                             </a>
                         </td>
-                        <td><a href="#" data-toggle="modal" data-target="#CFullInfoModal">Full Info</a></td>
+                        <td>
+                            <a href="#" data-toggle="modal" data-target="#CFullInfoModal" data-id="{{$colleague->id}}" data-name="{{$colleague->full_name}}"
+                                    data-country="{{$colleague->country}}" data-wcountry="{{$colleague->work_country}}" data-office="{{$colleague->office_name}}" 
+                                    data-position="{{$colleague->position}}" data-phone1="{{$colleague->phone1}}" data-phone2="{{$colleague->phone2}}" 
+                                    data-phone3="{{$colleague->phone3}}" data-email="{{$colleague->email}}" data-website="{{$colleague->website}}" 
+                                    data-address="{{$colleague->address}}" data-status="{{$colleague->status}}" data-religion="{{$colleague->religion->name}}">
+                                Full Info
+                            </a>
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>
