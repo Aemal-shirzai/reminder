@@ -1,0 +1,89 @@
+#searchDiv{
+	position: relative;
+	width: 30%;
+	margin-bottom: 5px;
+}
+#searchForField{
+	padding-left: 30px;
+	padding-right: 75px;
+	color: #bbc0c4;
+	height: 45px;
+    font-size: 14px;
+    background-image: none !important;
+    border: 1px solid lightgray !important;
+    border-radius: 4px !important;
+}
+#searchForField:focus{
+	box-shadow: 0 0 0 1px rgba(52, 144, 220,0.25) !important;
+}
+#searchForField::placeholder{
+	color: #bbc0c4;
+}
+#searchIcon{
+	position: absolute !important;
+	top:15px;
+	left: 7px;
+	font-size: 15px;
+	cursor: pointer;
+	color: #bbc0c4;
+}
+#searchTypeDiv{
+	position: absolute;
+    width: 74px;
+    top: 2px;
+    right: 2px;
+    background: transparent;
+
+}
+#searchType{
+	border: none;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 11px;
+    padding: 0px;
+    color: #757563;
+    background-image:  none !important;
+    padding-left: 2px;
+}
+#searchType:focus{
+	box-shadow: 0 0 0 1px rgba(52, 144, 220,0.25) !important;
+}
+
+#statusType {
+	padding-left: 30px;
+	padding-right: 75px;
+	color: #8a8e92;
+	height: 45px;
+	font-size: 14px;
+	background-image: none !important;
+	border: 1px solid lightgray !important;
+	border-radius: 4px !important;
+}
+
+
+@media screen and (max-width: 1200px) and (min-width: 1024px){
+	#searchDiv{
+	width: 35%;
+	}
+}
+@media screen and (max-width: 1023px) and (min-width: 768px){
+	#searchDiv{
+		width: 45%;
+    }
+}
+@media screen and (max-width: 767px){
+	#searchDiv{
+		width: 100%;
+	}
+	#searchForField{
+		height: 37px;
+		font-size: 14px;
+	}
+	#searchIcon{
+		top:13px;
+		font-size: 14px;
+	}
+	#searchTypeDiv{
+	    top: 1px;
+    }
+}

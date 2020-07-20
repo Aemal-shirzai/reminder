@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <!-- CSS Files -->
     <link href="{{asset('css/material-dashboard.css')}}" rel="stylesheet">
+    <link href="{{asset('css/custom.css')}}" rel="stylesheet">
 </head>
 
 <body class="">
@@ -126,6 +127,7 @@
             var token = "{{ Session::token() }}"
             var changeStatusRoute = "{{ route('colleagues.changeStatus') }}"
             var colleaguesDeleteRoute = "{{ route('colleagues.delete') }}"
+            var colleaguesSearch = "{{ route('colleagues.search') }}"
         </script>
         @yield("scripts")
 </body>

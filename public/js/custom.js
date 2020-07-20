@@ -98,42 +98,52 @@ $("#CFullInfoModal").on("show.bs.modal",function(event){
                 <span aria-hidden="true">&times;</span>
             </button>
             <h3 class="text-center font-weight-bold">
-               ${name} <span class="text-muted" style="font-size: 10px;">(${religion})</span>
-                <small class="d-block text-muted" style="font-size: 13px;">${position} In ${office}</small>
+               <span id="fullInfoName">  </span> <span class="text-muted" style="font-size: 10px;" id="fullInfoReligion"></span>
+                <small class="d-block text-muted" style="font-size: 13px;" id="fullInfoPositionOffice"></small>
             </h3>
             <div style="font-size: 13px;">
                 <p style="margin-bottom: 0px;margin-top:0px">
-                    <strong>Address:</strong> ${address} | ${wcountry}
+                    <strong>Address:</strong> <span id="fullInfoAddressAndWCountry"></span>
                 </p>
 
                 <div class="dropdown-divider"></div>
                 <div class="">
                     <div class="row">
-                        <strong class="col-4">Telephone:</strong> <span class="col-8">${phone1}</span>
+                        <strong class="col-4">Telephone:</strong> <span class="col-8" id="fullInfoPhone1"></span>
                     </div>
                     <div class="row">
-                        <strong class="col-4">Cell Phone:</strong> <span class="col-8">${phone2}</span>
+                        <strong class="col-4">Cell Phone:</strong> <span class="col-8" id="fullInfoPhone2"></span>
                     </div>
                     <div class="row">
-                        <strong class="col-4">Office Phone:</strong> <span class="col-8">${phone3}</span>
+                        <strong class="col-4">Office Phone:</strong> <span class="col-8" id="fullInfoPhone3"></span>
                     </div>
                 </div>
                 <div class="dropdown-divider"></div>
-                <a href="mailTo:${email}"
-                    style="color: lightblue;">${email}</a>
+                <a href="" style="color: lightblue;" id="fullInfoEmail"></a>
                 <div class="row mt-2">
                     <div class="col-4 ">
-                        <h4 class="font-weight-bold">${country}</h4>
+                        <h4 class="font-weight-bold" id="fullInfoCountry"></h4>
                     </div>
                     <div class="col-8 text-right">
-                        <a href="https://${website}" target="_blank" style="color: lightblue;"
-                            class="">${website}</a>
+                        <a href="" target="_blank" style="color: lightblue;" id="fullInfoWebsite"
+                            class=""></a>
                     </div>
                 </div>
             </div>
         </div>
     `)   
 
+    $("#fullInfoAddressAndWCountry").text(`${address} | ${wcountry} `)
+    $("#fullInfoWebsite").text(website).attr("href",`https://${website}`)
+    $("#fullInfoEmail").text(email).attr("href",`mailTo:${email}`)
+    $("#fullInfoCountry").text(country)
+    $("#fullInfoPhone1").text(phone1)
+    $("#fullInfoPhone2").text(phone2)
+    $("#fullInfoPhone3").text(phone3)
+    $("#fullInfoName").text(name)
+    $("#fullInfoPositionOffice").text(`${position} In ${office} `)
+    $("#fullInfoReligion").text(`(${religion})`)
+    
 });
 
 
@@ -146,4 +156,106 @@ function removeLoading(button) {
     button.removeProp("disabled")
     button.css("cursor","pointer") 
     button.html(` <span class="material-icons">delete</span>`) 
+}
+
+// search for colleagues
+function searchColleagues() {
+    var value = $("#searchForField").val().trim()
+    var by = $("#searchType").val()
+    var statusType = $("#statusType").val()
+    var placeholder = $("#placholderForSearch");
+    placeholder.text("")
+    placeholder.html(`
+        <tr>
+            <td colspan="8">
+                <div class="m-4 p-4 text-center">
+                    <span class="material-icons">hourglass_top</span>
+                    searching...
+                 </div>
+            </td>
+        </tr>
+    `)
+
+    $.ajax({
+        method: "GET",
+        url:colleaguesSearch,
+        data:{ value:value, by:by , statusType:statusType , _token:token  }
+    }).done(function(response){
+        placeholder.text('')
+
+        if(response.result){
+            response.result.forEach(res => {
+                placeholder.append(`
+                    <tr id="CRow-${res.id}">
+                        <td id="colID-${res.id}"></td>
+                        <td id="colName-${res.id}"></td>
+                        <td id="colCountry-${res.id}"></td>
+                        <td id="colOffice-${res.id}"></td>
+                        <td id="colPosition-${res.id}"></td>
+                        <td id="colReligion-${res.id}"></td>
+                        <td>
+                            <a href="colleagues/${res.id}/edit" class="btn btn-info"
+                                style="padding:8px"><span class="material-icons">edit</span></a>
+
+                            <a href="javascript:void(0)" class="btn btn-danger" style="padding:8px" data-toggle="modal"
+                                data-target="#CDeleteModal" data-id="${res.id}"
+                                id="cDeleteButton-${res.id}">
+                                <span class="material-icons">delete</span>
+                            </a>
+
+                            <a href="javascript:void(0)"
+                                class="btn ${ (res.status == 1 ? 'btn-success' : 'btn-warning') }"
+                                style="padding:8px" onclick="changeStatus(event, '${res.id}')"
+                                id="statusBtn-${res.id}">
+                                ${ (res.status == 1 ? '<span class="material-icons">check_circle</span>' : '<span class="material-icons">pending</span>') }
+                            </a>
+                        </td>
+                        <td>
+                            <a href="#" data-toggle="modal" data-target="#CFullInfoModal" data-id="${res.id}"
+                                data-name="${res.full_name}" data-country="${res.country}"
+                                data-wcountry="${res.work_country}" data-office="${res.office_name}"
+                                data-position="${res.position}" data-phone1="${ (res.phone1 ? res.phone1 : '')}"
+                                data-phone2="${(res.phone2 ? res.phone2 : '')}" data-phone3="${(res.phone3 ? res.phone3 : '')}"
+                                data-email="${res.email}" data-website="${(res.website ? res.website : '')}"
+                                data-address="${res.address}" data-status="${res.status}"
+                                data-religion="${res.religion.name}">
+                                Full Info
+                            </a>
+                        </td>
+                    </tr>
+                `);
+                $(`#colID-${res.id}`).text(res.id)
+                $(`#colName-${res.id}`).text(res.full_name)
+                $(`#colCountry-${res.id}`).text(res.country)
+                $(`#colOffice-${res.id}`).text(res.office_name)
+                $(`#colPosition-${res.id}`).text(res.position)
+                $(`#colReligion-${res.id}`).text(res.religion.name)
+            })
+        }else if(response.empty){
+            placeholder.text("")
+            placeholder.html(`
+            <tr>
+                <td colspan="8">
+                    <div class="m-4 p-4 text-center">
+                        Not Found!
+                     </div>
+                </td>
+            </tr>
+        `)
+        }
+
+        
+    }).fail(function(err){
+        placeholder.text("")
+        placeholder.html(`
+        <tr>
+            <td colspan="8">
+                <div class="m-4 p-4 text-center">
+                   Someting Went Wrong! Please try again
+                 </div>
+            </td>
+        </tr>
+    `)
+    })
+
 }

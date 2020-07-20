@@ -86,4 +86,51 @@ class ColleaguesController extends Controller
 
         return response()->json(["message"=>"Deleted!"]);
     }
+
+
+    // search Colleagues
+    public function search(Request $request) {
+        $value = $request->value;
+        $by = $request->by;
+        $statusType = $request->statusType;
+        $result = [];
+        
+        if(strlen($value) < 1 ){
+            if($statusType == "both") {
+                $result = Colleague::with("religion")->get();
+            }else {
+                $result = Colleague::where("status","$statusType")->with("religion")->get();
+            }  
+        }else {
+            if($by == "religion"){
+                if($statusType == 'both'){
+                    $result = Colleague::whereHas('religion',function($query) use ($value){
+                        $query->where("name","LIKE", "%{$value}%");
+                    })->with('religion')->get();
+                }else {
+                    $result = Colleague::where("status","$statusType")->whereHas('religion',function($query) use ($value){
+                        $query->where("name","LIKE", "%{$value}%");
+                    })->with('religion')->get();
+                }    
+            }else{
+                if($statusType == "both"){
+                    $result = Colleague::query()->where("$by","LIKE","%{$value}%")->with("religion")->get();
+                }else {
+                    $result = Colleague::query()->where("status","$statusType")->where("$by","LIKE","%{$value}%")->with("religion")->get();   
+                }
+                
+            }
+        }   
+
+       
+        if($result->count() > 0){
+            return response()->json(["result"=>$result]);
+        }else {
+            return response()->json(["empty"=>"Not Found"]);
+        }
+       
+
+
+    }
+
 }
