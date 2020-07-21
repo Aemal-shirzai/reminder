@@ -146,18 +146,6 @@ $("#CFullInfoModal").on("show.bs.modal",function(event){
     
 });
 
-
-function addLoading(button) {
-    button.prop("disabled",true)
-    button.css("cursor","not-allowed") 
-    button.html(` <span class="material-icons">hourglass_top</span>`) 
-}
-function removeLoading(button) {
-    button.removeProp("disabled")
-    button.css("cursor","pointer") 
-    button.html(` <span class="material-icons">delete</span>`) 
-}
-
 // search for colleagues
 function searchColleagues() {
     var value = $("#searchForField").val().trim()
@@ -258,4 +246,43 @@ function searchColleagues() {
     `)
     })
 
+}
+
+// events delete modal
+$("#EDeleteModal").on("show.bs.modal",function(event){
+    var button = $(event.relatedTarget);
+    var modal = $(this);
+    var deleteBtn = $("#eventsModalDeleteBtn");
+    var id = button.data('id');
+    deleteBtn.attr("onclick",`deleteEvents(${id})`)
+});
+// events delete function
+function deleteEvents(id){
+    event.preventDefault()
+    $("#eventsModalDeleteClose").click()
+    var btn = $(`#eDeleteBtn-${id}`)
+    addLoading(btn)
+
+    $.ajax({
+        method:"DELETE",
+        url:eventsDeleteRoute,
+        data:{id:id, _token:token}
+    }).done(function(response){
+        removeLoading(btn)
+        $(`#eventDiv-${id}`).remove()
+    }).fail(function(err){
+        removeLoading(btn)
+    })
+}
+
+
+function addLoading(button) {
+    button.prop("disabled",true)
+    button.css("cursor","not-allowed") 
+    button.html(` <span class="material-icons">hourglass_top</span>`) 
+}
+function removeLoading(button) {
+    button.removeProp("disabled")
+    button.css("cursor","pointer") 
+    button.html(` <span class="material-icons">delete</span>`) 
 }

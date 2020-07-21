@@ -2,10 +2,12 @@
 
 namespace App\View\Components;
 
+use App\Religion;
 use Illuminate\View\Component;
 
 class eventsCreate extends Component
 {
+    public $religions;
     /**
      * Create a new component instance.
      *
@@ -13,7 +15,7 @@ class eventsCreate extends Component
      */
     public function __construct()
     {
-        //
+        $this->religions = Religion::pluck("name","id");
     }
 
     /**

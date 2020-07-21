@@ -13,45 +13,67 @@
                     </div>
                     <div class="card-body">
                         <div class="mb-4">
-                            <a href="{{route('events.createList')}}" class="btn btn-info" style="padding:8px">Cancel</a>
-                            <a href="#" class="btn btn-danger" style="padding:8px" data-toggle="modal" data-target="#EDeleteModal"><span class="material-icons">delete</span></a>
+                            <a href="{{route('events.createList')}}" class="btn btn-info" style="padding:8px">Back</a>
                         </div>
-                        {!! Form::open() !!}
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        {!! Form::label("title","Title For Event",["class"=>"bmd-label-floating"]) !!}
-                                        {!! Form::text("title",null,["class"=>"form-control"]) !!}
-                                    </div>
+                        {!! Form::model($event,["method"=>"PUT","action"=>["EventController@update",$event->id]]) !!}
+                        @if(session("eventsUpdateSuccess"))
+                        <div class="alert alert-success text-center mt-4 mb-4" style="padding:8px">
+                            <button class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            {{session("eventsUpdateSuccess")}}
+                        </div>
+                        @endif
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    {!! Form::label("title","Title For Event",["class"=>"bmd-label-floating"]) !!}
+                                    {!! Form::text("title",null,["class"=>"form-control"]) !!}
+                                    @error('title')
+                                    <span class="invalid-feedback" role="alert" style="display:block">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        {!!
-                                        Form::select("relagion_id",[""=>"Relagion","1"=>"Islam","2"=>"Christian"],null,["class"=>"form-control"])
-                                        !!}
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        {!! Form::label("date","Date",["class"=>"bmd-label-floating"]) !!}
-                                        {!! Form::text("date",null,["class"=>"form-control dateP"]) !!}
-                                    </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    {!! Form::select("religion_id",$religions,null,["class"=>"form-control"]) !!}
+                                    @error('religion_id')
+                                    <span class="invalid-feedback" role="alert" style="display:block">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        {!! Form::label("message","Write Message For Event
-                                        *",["class"=>"bmd-label-floating"]) !!}
-                                        <textarea name="message" id="message" cols="" rows="5"
-                                            class="form-control"></textarea>
-                                    </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    {!! Form::label("date","Date",["class"=>"bmd-label-floating"]) !!}
+                                    {!! Form::text("date",null,["class"=>"form-control dateP"]) !!}
+                                    @error('date')
+                                    <span class="invalid-feedback" role="alert" style="display:block">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
                             </div>
-                            {!! Form::submit("Update Event",["class"=>"btn btn-primary"]) !!}
-                            <div class="clearfix"></div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    {!! Form::label("message","Write Message For Event
+                                    *",["class"=>"bmd-label-floating"]) !!}
+                                    {!! Form::textarea("message",null,["class"=>"form-control","rows"=>"5"]) !!}
+                                    @error('message')
+                                    <span class="invalid-feedback" role="alert" style="display:block">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        {!! Form::submit("Update Event",["class"=>"btn btn-primary"]) !!}
+                        <div class="clearfix"></div>
                         {!! Form::close() !!}
                     </div>
                 </div>
@@ -64,10 +86,11 @@
 
 @section("scripts")
 
-    <script>
-        flatpickr(".dateP", {});
-    
-    </script>
+<script>
+flatpickr(".dateP", {
+    disableMobile: true
+});
+</script>
 
 
 @endsection

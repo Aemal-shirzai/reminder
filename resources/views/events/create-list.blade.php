@@ -25,7 +25,9 @@
 @section("scripts")
 
     <script>
-        flatpickr(".dateP", {});
+        flatpickr(".dateP", {
+            disableMobile:true
+        });
     
     </script>
 

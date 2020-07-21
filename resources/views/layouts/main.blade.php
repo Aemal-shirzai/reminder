@@ -128,6 +128,7 @@
             var changeStatusRoute = "{{ route('colleagues.changeStatus') }}"
             var colleaguesDeleteRoute = "{{ route('colleagues.delete') }}"
             var colleaguesSearch = "{{ route('colleagues.search') }}"
+            var eventsDeleteRoute = "{{ route('events.delete') }}"
         </script>
         @yield("scripts")
 </body>

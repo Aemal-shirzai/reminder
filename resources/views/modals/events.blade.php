@@ -13,8 +13,8 @@
         <small class="d-block">Remember There Is No Comeback</small>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-danger">Delete</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="eventsModalDeleteClose">Close</button>
+        <button type="button" class="btn btn-danger" id="eventsModalDeleteBtn">Delete</button>
       </div>
     </div>
   </div>

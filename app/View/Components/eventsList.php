@@ -2,10 +2,12 @@
 
 namespace App\View\Components;
 
+use App\Event;
 use Illuminate\View\Component;
 
 class eventsList extends Component
 {
+    public $events;
     /**
      * Create a new component instance.
      *
@@ -13,7 +15,7 @@ class eventsList extends Component
      */
     public function __construct()
     {
-        //
+        $this->events = Event::orderBy("date","asc")->get();
     }
 
     /**

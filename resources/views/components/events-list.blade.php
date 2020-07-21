@@ -4,24 +4,31 @@
         <p class="card-category"> Here Is The List Of All Events Registered To System</p>
     </div>
     <div class="card-body">
+    @if($events->count() > 0)
         <div class="row">
-            @for($a = 0; $a <= 10;$a++)
-                <div class="col-md-4">
+            @foreach($events as $event)
+                <div class="col-md-4" id="eventDiv-{{$event->id}}">
                     <div class="card card-profile">
                         <div class="card-body">
-                            <h6 class="card-category text-gray">Title For The Events <br><span>2020-May-4</span></h6>
-                            <h4 class="card-title">Islam</h4>
+                            <h6 class="card-category text-gray">{{ $event->title }} <br><span>{{ $event->date }}</span></h6>
+                            <h4 class="card-title">{{ $event->religion->name }}</h4>
                             <p class="card-description">
-                                Don't be scared of the truth because we need to restart the human foundation in
-                                truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but
-                                the back is...
+                               {{ $event->message }}
                             </p>
-                            <a href="{{route('events.edit',1)}}" class="btn btn-info" style="padding:8px"><span class="material-icons">edit</span></a>
-                            <a href="#" class="btn btn-danger" style="padding:8px" data-toggle="modal" data-target="#EDeleteModal"><span class="material-icons">delete</span></a>
+                            <a href="{{route('events.edit',$event->id)}}" class="btn btn-info" style="padding:8px"><span class="material-icons">edit</span></a>
+                            <a href="#" class="btn btn-danger" style="padding:8px" data-toggle="modal" data-target="#EDeleteModal" data-id="{{$event->id}}" 
+                                id="eDeleteBtn-{{$event->id}}">
+                                <span class="material-icons">delete</span>
+                            </a>
                         </div>
                     </div>
                 </div>
-            @endfor
+            @endforeach
         </div>
+    @else
+        <h3 class="text-center p-4 mt-4">
+            No Events Registred!
+        </h3>
+    @endif
     </div>
 </div>
