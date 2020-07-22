@@ -45,3 +45,7 @@ Route::GET("events/{id}/edit","EventController@edit")->name("events.edit");
 Route::POST("events/store","EventController@store")->name("events.store");
 Route::PUT("events/{id}/update","EventController@update")->name("events.update");
 Route::DELETE("events/delete","EventController@delete")->name("events.delete");
+
+
+// test send Email
+Route::get("sendmail","ProfileController@sendMail")->name("mail.send");

@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\sendMsgs;
 use GuzzleHttp\Middleware;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class ProfileController extends Controller
 {
@@ -61,4 +63,32 @@ class ProfileController extends Controller
             return back()->with("ChangePasswordSuccess","Password Changed!");
         }
     }
+
+
+
+
+    // test send Email
+    public function sendMail() {
+        $name = "Mustamandi";
+        $message = "Eid Mubarak";
+
+        // $data = [
+        //     "name" => $name,
+        //     "email" => $email,
+        //     "content" => $message
+        // ];
+        // Mail::send("mail.contact",$data,function($msg) use ($subject){
+        //     $msg->to("aemal_shirzai@yahoo.com","Aemal Yaooo")->subject($subject);
+        // });
+        $colleagues = [
+            [ "email" => "aemal_shirzai@yahoo.com", "name" => "Aemal Yahoo" ],
+            [ "email" => "aemalshirzai2016@gmail.com", "name" => "Aemal Gmail" ],
+        ];
+        
+        foreach($colleagues as $colleague){
+            $subject = "Congratulations ". $colleague['name'];
+            Mail::to($colleague['email'])->send(new sendMsgs($name,$message,$subject));
+        }
+    }
+
 }
