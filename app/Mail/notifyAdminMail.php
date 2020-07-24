@@ -7,23 +7,27 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class sendMsgs extends Mailable
+class notifyAdminMail extends Mailable
 {
     use Queueable, SerializesModels;
+    public $title;
     public $content;
-    public $name;
-    public $subject;
+    public $religion;
+    public $countDays;
+    public $eventDate;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($name,$message, $subject)
+    public function __construct($title, $message, $religion,$countDays,$eventDate)
     {
+        $this->title = $title;
         $this->content = $message;
-        $this->name = $name;
-        $this->subject = $subject;
-    }   
+        $this->religion = $religion;
+        $this->countDays = $countDays;
+        $this->eventDate = $eventDate;
+    }
 
     /**
      * Build the message.
@@ -32,6 +36,6 @@ class sendMsgs extends Mailable
      */
     public function build()
     {
-        return $this->view('mail.contact')->subject($this->subject);
+        return $this->view('mails.notifyAdmin');
     }
 }

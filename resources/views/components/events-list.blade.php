@@ -20,6 +20,12 @@
                                 id="eDeleteBtn-{{$event->id}}">
                                 <span class="material-icons">delete</span>
                             </a>
+                            <hr>
+                            @if($event->status == 1)
+                                <span class="material-icons text-success" style="font-size: 30px;">check_circle</span>
+                            @else
+                                <span class="material-icons text-warning" style="font-size: 30px;">pending</span>
+                            @endif
                         </div>
                     </div>
                 </div>

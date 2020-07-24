@@ -7,20 +7,20 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class dailyWordMail extends Mailable
+class EventMail extends Mailable
 {
     use Queueable, SerializesModels;
-    public $key;
-    public $value;
+    public $title;
+    public $content;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($key , $value)
+    public function __construct($title, $content)
     {
-        $this->key = $key;
-        $this->value = $value;
+        $this->title = $title;
+        $this->content = $content;
     }
 
     /**
@@ -30,6 +30,6 @@ class dailyWordMail extends Mailable
      */
     public function build()
     {
-        return $this->view('mail.dailyWord')->subject("New English Word");
+        return $this->view('mails.eventMail')->subject($this->title);
     }
 }

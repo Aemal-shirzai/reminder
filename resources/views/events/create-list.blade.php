@@ -24,12 +24,15 @@
 
 @section("scripts")
 
-    <script>
-        flatpickr(".dateP", {
-            disableMobile:true
-        });
-    
-    </script>
-
+<script>
+flatpickr(".dateP", {
+    disableMobile: true,
+    enableTime: true,
+    // time_24hr:true,
+    defaultHour: 0,
+    enableSeconds: true
+});
+</script>
+s
 
 @endsection

@@ -19,6 +19,7 @@ class CreateEventsTable extends Migration
             $table->text("message");
             $table->bigInteger("religion_id")->unsigned();
             $table->timestamp("date");
+            $table->tinyInteger("status")->default(0);
             $table->timestamps();
 
             $table->foreign("religion_id")->references("id")->on("religions")->onDelete("cascade")->onUpdate("cascade");

@@ -46,6 +46,7 @@ class EventController extends Controller
         ]);
 
         $event = Event::findOrFail($id);
+        $request['status'] = 0;
         $update = $event->update($request->all());
 
         if($update) {

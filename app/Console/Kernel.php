@@ -13,7 +13,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        //
+        'App\Console\Commands\EventsMessage',
+        'App\Console\Commands\notifyAdmin',
     ];
 
     /**
@@ -25,8 +26,8 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
-        $schedule->command('daily:word')->everyMinute();
-
+        $schedule->command('notify:admin')->daily();
+        $schedule->command('event:message')->hourly();
     }
 
     /**

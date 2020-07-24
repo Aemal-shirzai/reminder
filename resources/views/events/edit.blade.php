@@ -88,8 +88,12 @@
 
 <script>
 flatpickr(".dateP", {
-    disableMobile: true
-});
+    disableMobile:true,
+    enableTime:true,
+    // time_24hr:true,
+    defaultHour:0,
+    enableSeconds:true
+}); 
 </script>
 
 
