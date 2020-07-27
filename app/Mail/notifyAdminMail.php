@@ -15,18 +15,20 @@ class notifyAdminMail extends Mailable
     public $religion;
     public $countDays;
     public $eventDate;
+    public $type;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($title, $message, $religion,$countDays,$eventDate)
+    public function __construct($title, $message, $religion,$countDays,$eventDate,$type)
     {
         $this->title = $title;
         $this->content = $message;
         $this->religion = $religion;
         $this->countDays = $countDays;
         $this->eventDate = $eventDate;
+        $this->type = $type;
     }
 
     /**

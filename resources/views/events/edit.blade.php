@@ -63,7 +63,7 @@
                                 <div class="form-group">
                                     {!! Form::label("message","Write Message For Event
                                     *",["class"=>"bmd-label-floating"]) !!}
-                                    {!! Form::textarea("message",null,["class"=>"form-control","rows"=>"5"]) !!}
+                                    {!! Form::textarea("message",null,["class"=>"form-control summernote"]) !!}
                                     @error('message')
                                     <span class="invalid-feedback" role="alert" style="display:block">
                                         <strong>{{ $message }}</strong>

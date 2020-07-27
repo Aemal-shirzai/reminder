@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Colleague;
 use App\Event;
 use App\Mail\EventMail;
+use App\Mail\notifyAdminMail;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Mail;
@@ -64,9 +65,9 @@ class EventsMessage extends Command
                         }
                     }
                     $event->update(["status"=>1]);
-                    
+                    Mail::to("aemalshirzai2016@gmail.com")->send(new notifyAdminMail($title,$message,$event->religion->name,0,$event->date,"onTime"));
                 }
-                
+               
             }
         }
     }

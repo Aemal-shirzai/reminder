@@ -286,3 +286,31 @@ function removeLoading(button) {
     button.css("cursor","pointer") 
     button.html(` <span class="material-icons">delete</span>`) 
 }
+
+
+// event full info
+$("#eventFullInfoModal").on("show.bs.modal", function (event) {
+    var button = $(event.relatedTarget)
+    var modal = $(this);
+    var body = modal.find(".modal-body");
+    var title = button.data("title");
+    var date = button.data("date");
+    var religion = button.data("religion");
+    var message = button.data("message");
+
+    // placeholders
+    var titleP = modal.find(".modal-body #titleP");
+    var dateP = modal.find(".modal-body #dateP");
+    var religionP = modal.find(".modal-body #religionP");
+    var messageP = modal.find(".modal-body #messageP");
+    titleP.text("")
+    dateP.text("")
+    religionP.text("")
+    messageP.text("")
+
+    titleP.text(title)
+    dateP.text(date)
+    religionP.text(religion)
+    messageP.html(message)
+
+})

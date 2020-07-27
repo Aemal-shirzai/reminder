@@ -52,8 +52,8 @@ class notifyAdmin extends Command
 
                 if($eventDate == $now && $event->status == 0) {
                     $countDays = $event->date->diffInDays(Carbon::now("Asia/kabul")->format('Y-m-d H:i:s'));
-                    if($countDays == 10) {
-                        Mail::to("aemalshirzai2016@gmail.com")->send(new notifyAdminMail($title,$message,$religion,$countDays,$event->date));
+                    if($countDays == 2) {
+                        Mail::to("aemalshirzai2016@gmail.com")->send(new notifyAdminMail($title,$message,$religion,$countDays,$event->date,"before"));
                     }
                 }
 

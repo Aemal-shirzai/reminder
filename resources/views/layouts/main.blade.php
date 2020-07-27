@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
     <!-- date picker css -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <!-- summernote -->
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
     <!-- CSS Files -->
     <link href="{{asset('css/material-dashboard.css')}}" rel="stylesheet">
     <link href="{{asset('css/custom.css')}}" rel="stylesheet">
@@ -56,7 +58,8 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('logout')}}" onclick="event.preventDefault(); document.getElementById('logout-form').submit()">
+                        <a class="nav-link" href="{{route('logout')}}"
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit()">
                             <i class="material-icons">exit_to_app</i>
                             <p>Logout</p>
                         </a>
@@ -83,7 +86,7 @@
                             <li class="nav-item dropdown">
                                 <a class="nav-link" href="javascript:;" id="navbarDropdownProfile"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    {{ Auth::user()->name }} 
+                                    {{ Auth::user()->name }}
                                     <i class="material-icons" style="font-size: 15px;">chevron_right</i>
                                     <p class="d-lg-none d-md-block">
                                         Account
@@ -93,7 +96,8 @@
                                     <a class="dropdown-item" href="{{route('profile.edit')}}">Profile</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="{{route('logout')}}"
-                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit()">Log out</a>
+                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit()">Log
+                                        out</a>
                                 </div>
                             </li>
                         </ul>
@@ -104,7 +108,7 @@
             </nav>
             <!-- End Navbar -->
             <div class="content">
-                
+
                 @yield("content")
 
             </div>
@@ -123,12 +127,56 @@
         <script src="{{asset('js/extra.js')}}" type="text/javascript"></script>
         <script src="{{asset('js/custom.js')}}" type="text/javascript"></script>
 
+        <!-- summernote editor -->
+        <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+
         <script>
-            var token = "{{ Session::token() }}"
-            var changeStatusRoute = "{{ route('colleagues.changeStatus') }}"
-            var colleaguesDeleteRoute = "{{ route('colleagues.delete') }}"
-            var colleaguesSearch = "{{ route('colleagues.search') }}"
-            var eventsDeleteRoute = "{{ route('events.delete') }}"
+        var token = "{{ Session::token() }}"
+        var changeStatusRoute = "{{ route('colleagues.changeStatus') }}"
+        var colleaguesDeleteRoute = "{{ route('colleagues.delete') }}"
+        var colleaguesSearch = "{{ route('colleagues.search') }}"
+        var eventsDeleteRoute = "{{ route('events.delete') }}"
+        </script>
+        <script>
+        $(document).ready(function() {
+            $('.summernote').summernote({
+                placeholder: 'Message',
+                height: 300,
+                fontSizeUnits: ['px'],
+
+                codemirror: {
+                    theme: 'cerulean'
+                },
+                toolbar: [
+                    // [groupName, [list of button]]
+                    ['style', ['bold', 'italic', 'underline', 'clear']],
+                    // ['font', ['strikethrough', 'superscript', 'subscript']],
+                    // ['font', ['strikethrough']],
+                    ['fontsize', ['fontsize']],
+                    // ['color', ['color']],
+                    // ['fontname', ['fontname']],
+                    // ['table', ['table']],
+                    ['insert', ['link', 'hr']],
+                    // ['view', ['fullscreen', 'help']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['height', ['height']]
+                ],
+                callbacks: {
+                    onPaste: function(e) {
+                        var bufferText = ((e.originalEvent || e).clipboardData || window
+                            .clipboardData).getData('text/html');
+                        e.preventDefault();
+                        var div = $('<div />');
+                        div.append(bufferText);
+                        div.find('*').removeAttr('style');
+                        setTimeout(function() {
+                            document.execCommand('insertHtml', false, div.html());
+                        }, 1);
+                    }
+                },
+
+            });
+        });
         </script>
         @yield("scripts")
 </body>
